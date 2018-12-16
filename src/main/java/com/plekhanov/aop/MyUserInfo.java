@@ -8,4 +8,8 @@ public class MyUserInfo implements MyRepo {
     public void getInfo() {
         System.out.println("User Max age 25");
     }
+
+    public void withParam(String name) {
+        System.out.println(name);
+    }
 }

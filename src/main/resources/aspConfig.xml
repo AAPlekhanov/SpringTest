@@ -6,18 +6,45 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 <context:component-scan base-package="com.plekhanov.aop"/>
-    <aop:aspectj-autoproxy/>
+    <!--<aop:aspectj-autoproxy/>-->
 
     <bean id="myTransaction" class="com.plekhanov.aop.MyTransactionAspect"/>
+    <bean id="myTransactionAround" class="com.plekhanov.aop.MyTransactionAround"/>
+    <bean id="myUserInfo" class="com.plekhanov.aop.MyUserInfo"/>
+    <bean id="Intoduce" class="com.plekhanov.aop.IntroduceAspect"/>
 
 
     <aop:config>
-        <aop:aspect ref="myTransaction">
-            <aop:before pointcut="execution(* com.plekhanov.aop.MyUserInfo.getInfo())" method="beginTransaction"/>
-            <aop:after pointcut="execution(* com.plekhanov.aop.MyUserInfo.getInfo())"  method="after"/>
-            <aop:after-returning pointcut="execution(* com.plekhanov.aop.MyUserInfo.getInfo())" method="commitTransaction"/>
-            <aop:after-throwing pointcut="execution(* com.plekhanov.aop.MyUserInfo.getInfo())" method="rollback"/>
+        <aop:aspect>
+            <aop:declare-parents types-matching="com.plekhanov.aop.MyRepo+"
+                                 implement-interface="com.plekhanov.aop.NewInterface"
+                                 default-impl="com.plekhanov.aop.NewInterfaceImp"/>
 
         </aop:aspect>
+    </aop:config>
+
+
+    <aop:config>
+
+        <aop:aspect ref="myTransactionAround">
+          <aop:pointcut id="myPointCut" expression="execution(* com.plekhanov.aop.MyUserInfo.getInfo())"/>
+            <aop:around pointcut-ref="myPointCut" method="aroundTransaction"/>
+        </aop:aspect>
+
+
+        <aop:aspect ref="myTransaction">
+        <aop:pointcut id="pointCutWithParam" expression="execution(* com.plekhanov.aop.MyUserInfo.withParam(String)) and args(name)"/>
+            <aop:before pointcut-ref="pointCutWithParam" method="withParamPointCut"/>
+        </aop:aspect>
+
+
+
+        <!--<aop:aspect ref="myTransaction">-->
+            <!--<aop:pointcut id="myPointCut" expression="execution(* com.plekhanov.aop.MyUserInfo.getInfo())"/>-->
+            <!--<aop:before pointcut-ref="myPointCut" method="beginTransaction"/>-->
+            <!--<aop:after pointcut-ref="myPointCut"  method="after"/>-->
+            <!--<aop:after-returning pointcut-ref="myPointCut" method="commitTransaction"/>-->
+            <!--<aop:after-throwing pointcut="execution(* com.plekhanov.aop.MyUserInfo.getInfo())" method="rollback"/>-->
+        <!--</aop:aspect>-->
     </aop:config>
 </beans>

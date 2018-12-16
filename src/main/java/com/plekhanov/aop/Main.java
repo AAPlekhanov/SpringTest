@@ -11,6 +11,16 @@ public class Main {
         ApplicationContext context = new ClassPathXmlApplicationContext("classpath:aspConfig.xml");
 
         MyRepo repo = context.getBean(MyRepo.class);
-        repo.getInfo();
+
+       NewInterface newInterface =   (NewInterface)repo;
+
+       newInterface.doSomeWork();
+
+    //    repo.withParam("Max");
+
+        System.out.println();
+        System.out.println();
+
+       // repo.getInfo();
     }
 }

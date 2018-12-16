@@ -14,8 +14,8 @@ public class HelloWorld {
 
     public static void main(String[] args) {
 
-       ApplicationContext applicationContext = new  AnnotationConfigApplicationContext(Conf.class);
- //      AnnotationConfigApplicationContext applicationContext = new  AnnotationConfigApplicationContext();
+     //  ApplicationContext applicationContext = new  AnnotationConfigApplicationContext(Conf.class);
+   //    AnnotationConfigApplicationContext applicationContext = new  AnnotationConfigApplicationContext();
 
 
 //        applicationContext.getEnvironment().setActiveProfiles("dev");
@@ -27,12 +27,12 @@ public class HelloWorld {
 //        Book davinchiCode =  applicationContext.getBean(DavinchiCode.class);
    //     davinchiCode.read();
 
-    //    ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:SpringConfiguration.xml");
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:SpringConfiguration.xml");
 
          Car toyota =  applicationContext.getBean(Toyota.class);
 
 
-         ((AnnotationConfigApplicationContext) applicationContext).close();
+     //    ((AnnotationConfigApplicationContext) applicationContext).close();
 
          toyota.drive();
     }
