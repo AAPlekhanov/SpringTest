@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 public class MyTransactionAspect  implements Ordered {
 
     // поинткат с параметрами
-    @Pointcut("execution(* com.plekhanov.aop.MyUserInfo.withParam(String)) && args(name)")
+    @Pointcut("execution(* com.plekhanov.aop.MyRepoImpl.withParam(String)) && args(name)")
     public void beforeWithParam(String name){
 
     }
@@ -38,7 +38,7 @@ public class MyTransactionAspect  implements Ordered {
      */
 
     //Вынесли поинткат в как одельный метод
-    @Pointcut("execution(* com.plekhanov.aop.MyUserInfo.getInfo())")
+    @Pointcut("execution(* com.plekhanov.aop.MyRepoImpl.getInfo())")
     public void myPointCut(){
 
     }

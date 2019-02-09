@@ -18,7 +18,7 @@ public class MyTransactionAround {
 
     // пишем логику перед и после вызова какогото метода
 
-    @Around("execution(* com.plekhanov.aop.MyUserInfo.getInfo())")
+    @Around("execution(* com.plekhanov.aop.MyRepoImpl.getInfo())")
     public void aroundTransaction(ProceedingJoinPoint joinPoint){
 
         try {

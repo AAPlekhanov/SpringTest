@@ -14,13 +14,13 @@ public class Main {
 
        NewInterface newInterface =   (NewInterface)repo;
 
-       newInterface.doSomeWork();
+    //   newInterface.doSomeWork();
 
-    //    repo.withParam("Max");
+     //   repo.withParam("Max");
 
         System.out.println();
         System.out.println();
 
-       // repo.getInfo();
+        repo.getInfo();
     }
 }
